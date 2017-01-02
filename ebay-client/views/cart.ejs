@@ -1,0 +1,202 @@
+<html>
+
+<head>
+    <title>Cart</title>
+
+    <!-- <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet' type='text/css'>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/font-awesome.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/mystyles.css">
+
+</head>
+
+<body ng-app="Cart" ng-controller="CartController">
+
+<div class="global-wrapper clearfix" id="global-wrapper">
+
+
+    <div class="container">
+
+        <div class="row">
+            <table>
+                <tbody>
+                <tr>
+                    <td>
+                        <img src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/ebay-128.png">
+                    </td>
+                    <td width="100%">
+                        <input class="form-control" type="text" placeholder="Search...">
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">Search</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <nav class="navbar navbar-default navbar-main-white yamm">
+
+        <div class="collapse navbar-collapse" id="main-nav-collapse">
+            <div class="container">
+                <ul class="nav navbar-nav navbar-center">
+
+                    <li class="dropdown yamm-fw"><a href="/displaySellItemPage">Sell</a>
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/renderOrderHistoryPage">Purchase History</a>
+
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/rendersoldHistoryPage">Sold Items</a>
+
+                    </li>
+
+                    <li class="dropdown yamm-fw"><a href="#">Your items</a>
+
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/profile"><i class="fa fa-user"> Profile</i></a>
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/signout"><i class="fa fa-sign-out"> Sign Out</i></a>
+                    </li>
+                    <li class="dropdown yamm-fw"><a href="/renderCartPage"><i class="fa fa-shopping-cart"> Cart</i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="gap"></div>
+    <div class="gap"></div>
+
+
+    <div ng-if="available">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-12 col-md-10 col-md-offset-1">
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Total</th>
+                            <th> </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="cart in cartData">
+                            <td class="col-sm-8 col-md-6">
+                                <div class="media">
+                                    <a class="thumbnail pull-left" href="#"> <img class="media-object"
+                                                                                  src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png"
+                                                                                  style="width: 72px; height: 72px;">
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="/advertisements/{{cart.productId._id}}">{{cart.productId.productName}}</a>
+                                        </h4>
+                                        <!-- <h5 class="media-heading"> by <a href="#">Brand name</a></h5> -->
+                                        <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col-sm-1 col-md-1" style="text-align: center">
+                                <input type="number" class="form-control" ng-model="cart.quantity" min="1"
+                                       max="{{cart.productId.quantity}}"
+                                       ng-change="updateCart(cart.quantity,cart.productId.productPrice,cart.productId._id)">
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>${{cart.productId.productPrice}}</strong>
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>$ {{cart.total}}</strong></td>
+                            <td class="col-sm-1 col-md-1">
+                                <button type="button" class="btn btn-danger" ng-click="deleteFromCart(cart._id)">
+                                    <span class="fa fa-times"></span> Remove
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td><h5>Subtotal</h5></td>
+                            <td class="text-right"><h5><strong>$ {{subTotal}}</strong></h5></td>
+                        </tr>
+                        <tr>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td><h5>Estimated shipping</h5></td>
+                            <td class="text-right"><h5><strong>$ 2</strong></h5></td>
+                        </tr>
+                        <tr>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td><h3>Total</h3></td>
+                            <td class="text-right"><h3><strong>$ {{finalPrice}}</strong></h3></td>
+                        </tr>
+                        <tr>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>
+                                <button type="button" class="btn btn-default">
+                                    <span class="fa fa-shopping-cart"></span> <a href="/">Continue Shopping</a>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-success" ng-click="checkOut()">
+                                    Checkout <span class="fa fa-play"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="available2">
+
+
+        <div class="container">
+            <div class="text-center"><i class="fa fa-cart-arrow-down empty-cart-icon"></i>
+                <p class="lead">You haven't Fill Your Shopping Cart Yet</p><a class="btn btn-primary btn-lg" href="/">Start
+                    Shopping <i class="fa fa-long-arrow-right"></i></a>
+            </div>
+            <div class="gap"></div>
+            <div class="gap gap-large"></div>
+        </div>
+
+    </div>
+
+
+    <div class="gap gap-large"></div>
+    <div class="gap gap-large"></div>
+    <div class="gap gap-small"></div>
+
+</div>
+
+
+<script src="/javascripts/displayCart.js"></script>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+<script src="/javascripts/custom.js"></script>
+
+
+</body>
+
+
+</html>

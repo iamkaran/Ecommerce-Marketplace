@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="stylesheet" type="text/css" href="/stylesheets/productSectionStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/font-awesome.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/mystyles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body ng-app="profile">
+<div class="global-wrapper clearfix" id="global-wrapper">
+    <div class="container">
+        <div class="row">
+            <table>
+                <tbody>
+                <tr>
+
+                </tr>
+                <tr>
+                    <td>
+                        <a href="/"> <img
+                                    src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/ebay-128.png"></a>
+                    </td>
+                    <td width="100%">
+                        <input class="form-control" type="text" placeholder="Search...">
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">Search</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+
+    <div class="container">
+
+
+        <div class="row" ng-controller="updateProfile">
+            <div class="col-lg-12 col-md-12 col-sm-12"><img class="img-responsive img-thumbnail"
+                                                            src="http://p.ebaystatic.com/aw/social/profile_coverimg_wood.jpg">
+            </div>
+
+            <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1">
+                <div class="overlap-div">
+                    <div class="panel panel-body">
+                        <img class="img-responsive img-thumbnail" src="/images/profile.png">
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+
+                    <form>
+                        <div class="form-group">
+                            <label><b>Ebay Handle:</b></label>
+                            <input type="text" class="form-control" id="handle" value="<%= results[0].handle %>"
+                                   disabled="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label><b>First Name:</b></label>
+                            <input type="text" class="form-control" id="fname" value="<%= results[0].fname %>"
+                                   disabled="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label><b>Last Name:</b></label>
+                            <input type="text" class="form-control" id="lname" value="<%= results[0].lname %>"
+                                   disabled="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label><b>Email Address:</b></label>
+                            <input type="Email" class="form-control" id="email" value="<%= results[0].email %>"
+                                   disabled="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label><b>Mobile Number:</b></label>
+                            <input type="text" class="form-control" id="contactinfo" value="<%= results[0].contact %>"
+                                   disabled="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label><b>Birthdate:</b></label>
+                            <input type="text" class="form-control" id="date" value="<%= results[0].birthdate %>"
+                                   disabled="true"/>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label><b>Location:</b></label>
+                            <input type="text" class="form-control" id="location" value="<%= results[0].location %>"
+                                   disabled="true"/>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+
+
+            <div class="gap"></div>
+            <div class="gap"></div>
+
+
+        </div>
+
+        <script src="javascripts/profile.js"></script>
+
+</body>
+
+</html>

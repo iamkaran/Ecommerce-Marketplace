@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Ebay</title>
+
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'
+          type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>-->
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/font-awesome.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/mystyles.css">
+
+</head>
+
+<body ng-app="advertisement">
+<div class="global-wrapper clearfix" id="global-wrapper">
+
+    <div class="container">
+        <div class="row">
+            <table>
+                <tbody>
+                <tr>
+
+                </tr>
+                <tr>
+                    <td>
+                        <img src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/ebay-128.png">
+                    </td>
+                    <td width="100%">
+                        <input class="form-control" type="text" placeholder="Search...">
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">Search</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <nav class="navbar navbar-default navbar-main-white yamm">
+
+        <div class="collapse navbar-collapse" id="main-nav-collapse">
+            <div class="container">
+                <ul class="nav navbar-nav navbar-center">
+
+                    <li class="dropdown yamm-fw"><a href="/displaySellItemPage">Sell</a>
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/renderOrderHistoryPage">Purchase History</a>
+
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/rendersoldHistoryPage">Sold Items</a>
+
+                    </li>
+
+                    <li class="dropdown yamm-fw"><a href="#">Your items</a>
+
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/profile"><i class="fa fa-user"> Profile</i></a>
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/signout"><i class="fa fa-sign-out"> Sign Out</i></a>
+                    </li>
+                    <li class="dropdown yamm-fw"><a href="/renderCartPage"><i class="fa fa-shopping-cart"> Cart</i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="gap"></div>
+    <div class="container">
+
+
+        <div class="gap"></div>
+
+
+        <div class="container" ng-controller="postAdvertisement">
+
+            <div><h2 class="widget-title-lg">Enter your advertisement details:</h2></div>
+            <div class="gap gap-small"></div>
+
+            <div class="row" data-gutter="60">
+                <div class="col-md-5">
+
+                    <form ng-submit="sellItem()">
+
+                        <div class="form-group">
+                            <b>Product Name:</b>
+                            <input type="text" class="form-control" ng-model="productName" placeholder="Product name.."
+                                   required="true"/>
+                        </div>
+
+
+                        <div class="form-group">
+                            <b>Description:</b>
+                            <textarea class="form-control" ng-model="description" required="true"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <b>Shipped From:</b>
+                            <input type="text" class="form-control" ng-model="shippingLocation" placeholder="Location"
+                                   required="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="radio" onchange="hideBid(this)" name="xyz" ng-model="buttonValue" value="0"
+                                   checked> <b>Fixed Price</b> &nbsp &nbsp &nbsp
+
+                            <input type="radio" onchange="hideFixedPrice(this)" ng-model="buttonValue" value="1"
+                                   name="xyz"> <b>Bidding</b>
+                        </div>
+
+                        <div class="form-group">
+                            <div id="fixedPrice">
+                                <div class="form-group">
+                                    <b>Price:</b>
+                                    <input type="text" class="form-control" ng-model="price" placeholder="Price.."
+                                           required="true">
+                                </div>
+
+                                <div class="form-group">
+                                    <b>Quantity:</b>
+                                    <input type="number" class="form-control" min="1" ng-model="quantity"
+                                           placeholder="Quantity..">
+                                </div>
+
+
+                            </div>
+
+
+                            <div id="Bidding" style="display: none">
+                                <div class="form-group">
+                                    <b>Base Price:</b>
+                                    <input type="text" class="form-control" ng-model="price" placeholder="Price.."
+                                           required="true">
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <script type="text/javascript">
+
+
+                            function hideBid(x) {
+                                if (x.checked) {
+                                    document.getElementById("Bidding").style.display = "none";
+                                    document.getElementById("fixedPrice").style.display = "inline";
+                                }
+
+                            }
+
+
+                            function hideFixedPrice(x) {
+                                if (x.checked) {
+                                    document.getElementById("Bidding").style.display = "inline";
+                                    document.getElementById("fixedPrice").style.display = "none";
+                                }
+
+
+                            }
+                        </script>
+                        <input class="btn btn-primary" type="submit" value="Submit"/>
+                    </form>
+                    <div class="gap gap-large"></div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="gap gap-large"></div>
+        <div class="gap gap-large"></div>
+
+
+    </div>
+
+
+    <script src="javascripts/sellitem.js" type="text/javascript"></script>
+
+</body>
+
+</html>

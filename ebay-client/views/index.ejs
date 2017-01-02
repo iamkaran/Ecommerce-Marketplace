@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Ebay</title>
+    <!--<link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet' type='text/css'>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>-->
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/font-awesome.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/mystyles.css">
+
+</head>
+
+<body ng-app="fetchAdvertisements" ng-controller="fetchProducts">
+<div class="gap gap-small"></div>
+<div class="global-wrapper clearfix" id="global-wrapper">
+
+    <div class="container">
+        <div class="row">
+            <table>
+                <tbody>
+                <tr>
+
+                </tr>
+                <tr>
+                    <td>
+                        <img src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/ebay-128.png">
+                    </td>
+                    <td width="100%">
+                        <input class="form-control" type="text" placeholder="Search...">
+                    </td>
+                    <td>
+                        <input class="btn btn-primary" type="submit" value="Search"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <nav class="navbar navbar-default navbar-main-white yamm">
+
+        <div class="collapse navbar-collapse" id="main-nav-collapse">
+            <div class="container">
+                <ul class="nav navbar-nav navbar-center">
+
+                    <li class="dropdown yamm-fw"><a href="/displaySellItemPage">Sell</a>
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/renderOrderHistoryPage">Purchase History</a>
+
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/rendersoldHistoryPage">Sold Items</a>
+
+                    </li>
+
+                    <li class="dropdown yamm-fw"><a href="#">Your items</a>
+
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/profile"><i class="fa fa-user"> Profile</i></a>
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/signout"><i class="fa fa-sign-out"> Sign Out</i></a>
+                    </li>
+                    <li class="dropdown yamm-fw"><a href="/renderCartPage"><i class="fa fa-shopping-cart"> Cart</i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="gap"></div>
+    <div class="container">
+
+
+        <div class="gap"></div>
+        <h3 class="widget-title-lg">All Advertisements</h3>
+
+
+        <div class="row" data-gutter="15">
+
+
+            <div class="col-md-4" ng-repeat="product in productList">
+                <div class="product product-sm-left ">
+                    <ul class="product-labels"></ul>
+                    <div class="product-img-wrap">
+                        <img class="product-img" src="/images/product.png" alt="Image Alternative text"
+                             title="Image Title">
+                    </div>
+                    <a class="product-link" href="/advertisements/{{product._id}}"></a>
+                    <div class="product-caption">
+
+                        <h2 class="product-caption-title">{{ product.productName }}</h2>
+                        <div class="product-caption-price"><span class="product-caption-price-new">${{ product.productPrice }}</span>
+                        </div>
+                        <div class="gap gap-small"></div>
+                        <div ng-switch="{{product.forBid}}">
+                            <span style="color:green" ng-switch-when="0">For Sell</span>
+                            <span style="color:green" ng-switch-when="1">For Bid</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <script src="/javascripts/fetchAdvertisements.js"></script>
+    <div class="gap gap-large"></div>
+    <div class="gap gap-large"></div>
+    <div class="gap gap-large"></div>
+    <div class="gap gap-large"></div>
+</div>
+
+</body>
+
+</html>

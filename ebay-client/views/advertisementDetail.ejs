@@ -1,0 +1,218 @@
+<html>
+
+<head>
+    <title>Advertisements Details</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/font-awesome.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/mystyles.css">
+
+</head>
+
+<body ng-app="cart" ng-controller="addToCart">
+
+<div class="global-wrapper clearfix" id="global-wrapper">
+
+    <div class="container">
+        <div class="row">
+            <table>
+                <tbody>
+                <tr>
+
+                </tr>
+                <tr>
+                    <td>
+                        <img src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/ebay-128.png">
+                    </td>
+                    <td width="100%">
+                        <input class="form-control" type="text" placeholder="Search...">
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">Search</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <nav class="navbar navbar-default navbar-main-white yamm">
+
+        <div class="collapse navbar-collapse" id="main-nav-collapse">
+            <div class="container">
+                <ul class="nav navbar-nav navbar-center">
+
+                    <li class="dropdown yamm-fw"><a href="/displaySellItemPage">Sell</a>
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/renderOrderHistoryPage">Purchase History</a>
+
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/rendersoldHistoryPage">Sold Items</a>
+
+                    </li>
+
+                    <li class="dropdown yamm-fw"><a href="#">Your items</a>
+
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/profile"><i class="fa fa-user"> Profile</i></a>
+                    </li>
+
+
+                    <li class="dropdown yamm-fw"><a href="/signout"><i class="fa fa-sign-out"> Sign Out</i></a>
+                    </li>
+                    <li class="dropdown yamm-fw"><a href="/renderCartPage"><i class="fa fa-shopping-cart"> Cart</i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="gap"></div>
+    <div class="container">
+        <div class="gap"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+
+
+                    <div>
+                        <div class="product product-sm-left ">
+
+                            <img class="product-img" src="/images/productdetail.png" alt="Image Alternative text"
+                                 title="Image Title">
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-6">
+
+
+                <h1><%= results[0].productName %></h1> <br><br><br>
+                <% if(results[0].forBid == 0){ %>
+                <div>
+                    <h2>Price: $<%= results[0].productPrice %> </h2>
+
+
+                    <br><br>
+                    <h4 style="color: green;">Available Stock: <%= results[0].quantity %></h4>
+                    <br><br>
+                    <form ng-submit="addCart()">
+                        <div class="form-group">
+                            <h4>Enter Quantity:</h4>
+                            <input type="number" class="form-control" min="1" max="<%= results[0].quantity %>"
+                                   style="width: 150px;" ng-model="quantity"/>
+                            <input type="hidden" ng-init="unitprice='<%= results[0].productPrice %>'"
+                                   ng-model="unitprice"/>
+                            <input type="hidden" ng-init="productId='<%= results[0]._id %>'" ng-model="productId"/>
+
+                        </div>
+                        <br>
+                        <input class="btn btn-primary" type="submit" value="Add to cart"/>
+
+                    </form>
+                </div>
+                <% } else { %>
+
+                <div>
+
+                    <h2>Current Price:$<%= results[0].productPrice %></h2>
+
+
+                    <br>
+
+                    <h5 style="color: green">Time Left:<%= results[0].bidCompleteTime %></h5>
+                    <br>
+
+                    <form ng-submit="updateBasePrice()">
+                        <div class="form-group">
+                            <h4>Your Bid:</h4>
+                            <input type="number" class="form-control" min="<%= results[0].productPrice %>"
+                                   style="width: 150px;" ng-model="bidAmount"/>
+                        </div>
+                        <br>
+                        <input type="hidden" ng-init="productId='<%= results[0]._id %>'" ng-model="productId"/>
+                        <input class="btn btn-primary" type="submit" value="Place Bid"/>
+
+                    </form>
+                </div>
+                <% } %>
+
+            </div>
+        </div>
+        <div class="gap"></div>
+        <div class="tabbable product-tabs">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="#tab-1" data-toggle="tab">Description</a>
+                </li>
+                <li><a href="#tab-2" data-toggle="tab">Additional Information</a>
+                </li>
+
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab-1">
+                    <p> <%= results[0].productDescription %></p>
+
+                </div>
+                <div class="tab-pane fade" id="tab-2">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Sold By</td>
+                            <td>
+                                <a href="/profile/<%= results[0].sellerId.handle %>"> <%= results[0].sellerId.fname %>
+                                    &nbsp;<%= results[0].sellerId.lname %></a>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Shipped From</td>
+
+                            <td>
+                                <%= results[0].shippedFrom %>
+                            </td>
+
+
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="large"></div>
+
+
+    </div>
+    <div class="gap"></div>
+
+</div>
+
+
+<script src="/javascripts/addcart.js"></script>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+<script src="/javascripts/custom.js"></script>
+
+
+</body>
+
+
+</html>
